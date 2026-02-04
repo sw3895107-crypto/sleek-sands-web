@@ -6,7 +6,7 @@ export default function App() {
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
-    fetch(`${API_URL}/health`)
+    https://sleek-sands-api1.onrender.com/health
       .then(res => res.json())
       .then(data => setStatus(data.status))
       .catch(() => setStatus("error"));
