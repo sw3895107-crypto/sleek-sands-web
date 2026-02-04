@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "https://YOUR-API-URL.onrender.com";
+const API_URL = "https://sleek-sands-api1.onrender.com";";
 
 export default function App() {
   const [status, setStatus] = useState("loading");
