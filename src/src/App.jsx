@@ -1,21 +1,58 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const API_URL = "https://sleek-sands-api1.onrender.com";";
+const API_URL = "https://sleek-sands-api-1.onrender.com";
 
 export default function App() {
-  const [status, setStatus] = useState("loading");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [result, setResult] = useState("");
 
-  useEffect(() => {
-    https://sleek-sands-api1.onrender.com/health
-      .then(res => res.json())
-      .then(data => setStatus(data.status))
-      .catch(() => setStatus("error"));
-  }, []);
+  const testLogin = async () => {
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+
+      const data = await res.json();
+      console.log(data);
+      setResult(JSON.stringify(data, null, 2));
+    } catch (err) {
+      console.error(err);
+      setResult("Login failed");
+    }
+  };
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Sleek Sands</h1>
-      <p>API status: {status}</p>
+      <h2>Sleek Sands Login Test</h2>
+
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      <br /><br />
+
+      <input
+        placeholder="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <br /><br />
+
+      <button onClick={testLogin}>Test Login</button>
+
+      <pre>{result}</pre>
     </div>
   );
 }
